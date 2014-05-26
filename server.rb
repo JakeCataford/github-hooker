@@ -8,5 +8,5 @@ post '/incoming' do
       end
     end
   end
-  params
+    params.to_s
 end
