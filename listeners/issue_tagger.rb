@@ -1,3 +1,4 @@
+require 'octokit'
 class IssueTagger < Listener
   listen_to :issues
 
