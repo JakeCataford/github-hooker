@@ -18,4 +18,7 @@ class Test < MiniTest::Unit::TestCase
     post '/incoming', nil, "HTTP_X_GITHUB_EVENT" => "push"
     assert last_response.ok?
   end
+
+  def test_payload_with_condition
+  end
 end
