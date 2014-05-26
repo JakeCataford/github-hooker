@@ -20,5 +20,10 @@ class Test < MiniTest::Unit::TestCase
   end
 
   def test_payload_with_condition
+    post '/incoming', {
+      "zen" => "Half measures are as bad as nothing at all.",
+      "hook_id" => 2317414
+    }, "HTTP_X_GITHUB_EVENT" => "ping"
+
   end
 end
