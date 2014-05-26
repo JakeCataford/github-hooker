@@ -10,5 +10,5 @@ post '/incoming' do
       end
     end
   end
-  @payload
+    @payload.to_s
 end
