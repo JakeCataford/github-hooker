@@ -8,6 +8,5 @@ post '/incoming' do
       end
     end
   end
-  puts request.env
-  "ok"
+  request.env
 end
