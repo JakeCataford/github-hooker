@@ -9,7 +9,13 @@ class Test < MiniTest::Unit::TestCase
     Sinatra::Application
   end
 
-  def test_sample_listener
+  def test_base_case
     post '/incoming', {payload: "hello world"}, "HTTP_X_GITHUB_EVENT" => "push"
+    assert last_response.ok?
+  end
+
+  def test_nil_payload
+    post '/incoming', nil, "HTTP_X_GITHUB_EVENT" => "push"
+    assert last_response.ok?
   end
 end

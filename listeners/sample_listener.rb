@@ -1,7 +1,15 @@
 class SampleListener < Listener
   listen_to :push
 
-  on lambda{true} do
-    puts "something"
+  on -> (payload) { not payload.empty? } do |payload|
+    true
+  end
+
+  on -> (payload) { payload.empty? } do |payload|
+    true
+  end
+
+  on -> (payload) { payload["ref"] == "refs/heads/test" } do
+    true
   end
 end

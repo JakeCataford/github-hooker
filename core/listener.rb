@@ -1,25 +1,14 @@
-class ConditionalCallback
-  attr_accessor :condition, :callback
-  def initialize(condition, callback)
-    @condition = condition
-    @callback = callback
-  end
-
-  def do
-    if condition.call
-      callback.call
-    end
-  end
-end
-
 class Listener
-
+  attr_accessor :payload
   def self.metaclass; class << self; self; end; end
 
   def initialize(payload)
-    @payload = payload
-    self.class.metaclass.callbacks.each do |callback|
-      callback.do
+    self.payload = payload
+    callbacks = self.class.metaclass.callbacks # Copy callbacks into scope
+    callbacks.each do |callback_hash|
+      if callback_hash[:condition].call payload
+        callback_hash[:callback].call payload
+      end
     end
   end
 
@@ -38,9 +27,9 @@ class Listener
     return metaclass.accepted_events
   end
 
-  def self.on(condition, &callback)
+  def self.on(condition_method, &callback_method)
     metaclass.callbacks ||= []
-    metaclass.callbacks.push ConditionalCallback.new(condition, callback)
+    metaclass.callbacks.push condition: condition_method, callback: callback_method
   end
 
   def self.descendants
