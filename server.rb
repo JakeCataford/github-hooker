@@ -8,5 +8,5 @@ post '/incoming' do
       end
     end
   end
-  puts params
+  params
 end
