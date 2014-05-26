@@ -1,12 +1,14 @@
 require './core/loader'
 require 'sinatra'
+require 'json'
 post '/incoming' do
+    @payload = JSON.parse(request.body)
     Listener.descendants.each do  |klass|
     klass.accepted_events.each do |event|
       if event.to_s == request.env['HTTP_X_GITHUB_EVENT']
-        klass.new params
+        klass.new @payload
       end
     end
   end
-    params.to_s
+  @payload
 end
