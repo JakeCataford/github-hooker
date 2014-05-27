@@ -1,12 +1,19 @@
-require 'octokit'
 class IssueTagger < Listener
+  #####
+  # `listen_to` specifies the event type to act on.
+  # Look here for a list:
+  #
+  # https://developer.github.com/webhooks/
   listen_to :issues
 
-  on -> (payload) { payload["action"] == "opened" } do |payload|
-    client = Octokit::Client.new access_token: ENV['GITHUB_API_TOKEN']
-    issue = client.issue(payload["repository"]["full_name"], payload["issue"]["number"])
-    if issue.labels.empty?
-      client.add_labels_to_an_issue(payload["repository"]["full_name"], payload["issue"]["number"], ['untriaged'])
-    end
+  #####
+  # Example hook action:
+  #
+  # Adds an 'untriaged' label to new issues that were created
+  # without any labels.
+
+  action "Add 'untriaged' label to issues with none", -> (payload) { payload["action"] == "opened" } do |payload|
+    webhook = Webhook.new payload
+    webhook.add_labels_to_issue "untriaged" if webhook.issue.labels.empty?
   end
 end

@@ -1,29 +1,14 @@
-ENV['RACK_ENV'] = 'test'
-require 'minitest/autorun'
-require 'rack/test'
-require File.expand_path '../../server.rb', __FILE__
-
+require 'require_all'
+require_rel './test_helper'
 class Test < MiniTest::Unit::TestCase
-  include Rack::Test::Methods
-  def app
-    Sinatra::Application
+  include TestHelper
+  def test_issue_hook_triggers_issue_action
+    send_issue('issue_opened')
+    assert_action_called("Add 'untriaged' label to issues with none")
   end
 
-  def test_base_case
-    post '/incoming', {payload: "hello world"}, "HTTP_X_GITHUB_EVENT" => "push"
-    assert last_response.ok?
-  end
-
-  def test_nil_payload
-    post '/incoming', nil, "HTTP_X_GITHUB_EVENT" => "push"
-    assert last_response.ok?
-  end
-
-  def test_payload_with_condition
-    post '/incoming', {
-      "zen" => "Half measures are as bad as nothing at all.",
-      "hook_id" => 2317414
-    }, "HTTP_X_GITHUB_EVENT" => "ping"
-
+  def test_bad_event
+    send_payload('issue_opened', 'qwijibo')
+    assert_no_actions_triggered
   end
 end

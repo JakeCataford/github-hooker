@@ -1,3 +1,5 @@
 require 'require_all'
 require_rel '../core/listener'
+require_rel '../config/**/*.rb'
+require_rel '../lib/**/*.rb'
 require_rel '../listeners/**/*.rb'
