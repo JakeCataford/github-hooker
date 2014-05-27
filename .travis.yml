@@ -1,3 +1,6 @@
 language: ruby
 rvm:
-  - 2.1.1
+- 2.1.1
+env:
+  matrix:
+    secure: KPLMzvR9gtPb1QSaAdcUjM/JOdkjT9KIF1XwsiTZv41140iBGq2s+FFQ/etj7Rg80dLWLXW7zuCKyp8mQSiN8IZB0r+p9xkHuyhtwTmulmx0EgC7SuMSLF+bD37ygiJNy7jg9FrYtshrCuw6aGJ2Pou5VT1iCxcPZW2vJPJQd+Q=
