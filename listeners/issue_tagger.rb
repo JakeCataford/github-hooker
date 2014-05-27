@@ -4,6 +4,7 @@ class IssueTagger < Listener
   # Look here for a list:
   #
   # https://developer.github.com/webhooks/
+
   listen_to :issues
 
   #####

@@ -1,7 +1,7 @@
 class Webhook
   include Github
   attr_accessor :payload
-  def initialize(webhook_payload)
+  def initialize(webhook_payload = "")
     @payload = webhook_payload
   end
 
@@ -15,6 +15,10 @@ class Webhook
 
   def add_labels_to_issue *labels
     client.add_labels_to_an_issue(payload["repository"]["full_name"], payload["issue"]["number"], labels)
+  end
+
+  def create_hook(repository)
+    client.create_hook(repository, "web", { url: "#{Github::WebhookUrl}/incoming", content_type: 'json'}, { events: ['*'], active: true })
   end
 
   ####
