@@ -1,6 +1,7 @@
 hookup :nail_care:
 =============
 
+![Status](https://travis-ci.org/JakeCataford/hookup.svg)
 An easily extendable Sinatra application for handling Github webhooks.
 
 Installation
