@@ -11,7 +11,7 @@ Fork, Clone your fork, `bundle install`, then run `bx rackup`. You will need a f
 Usage
 ----
 
-github-hooker is designed to be very easily extendable for whatever chores you might want to do on your repository.
+hookup is designed to be very easily extendable for whatever chores you might want to do on your repository.
 
 Set up your github client in `config/github` by either exporting the environment variables or change them to something more familiar:
 
