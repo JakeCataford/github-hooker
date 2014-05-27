@@ -6,7 +6,7 @@ An easily extendable Sinatra application for handling Github webhooks.
 Installation
 -----
 
-Fork, Clone your fork, `bundle install`, then run `bx rackup`. You will need a forwarding service like ![ngrok](https://ngrok.com/) or ![forward](https://forwardhq.com/) to recieve webhooks on localhost.
+Fork, Clone your fork, `bundle install`, then run `bx rackup`. You will need a forwarding service like [ngrok](https://ngrok.com/) or [forward](https://forwardhq.com/) to recieve webhooks on localhost.
 
 Usage
 ----
